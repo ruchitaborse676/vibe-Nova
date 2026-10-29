@@ -1,0 +1,909 @@
+# MASTER PROMPT: VIBE-NOVA FULL-STACK E-COMMERCE WEBSITE
+
+Act as a senior full-stack software engineer, UI/UX designer, database architect, security engineer, and deployment specialist.
+
+Build a complete, production-minded, full-stack e-commerce web application named **Vibe-Nova**. This is a college engineering project that must also look and behave like a professional commercial shopping website.
+
+**Tagline:** "Your Style. Your Vibe. Your Universe."
+
+Do not create only a landing page, static mockup, or design prototype. Build a functional application with reusable components, working navigation, persistent data, authentication, product management, shopping cart, checkout, and deployment-ready code.
+
+First inspect the available project environment and its supported capabilities. Then implement the application directly in the project workspace. Make sensible decisions without repeatedly asking questions. Do not claim that external services work unless they have been configured and tested.
+
+==================================================
+1. BRAND IDENTITY AND VISUAL DESIGN
+==================================================
+
+Brand name: Vibe-Nova
+Brand initials: VN
+Tagline: Your Style. Your Vibe. Your Universe.
+
+Design a premium, contemporary shopping experience inspired by high-quality fashion, lifestyle, and electronics marketplaces. The design must be original and must not copy any specific brand's website.
+
+Visual direction:
+- Clean white and soft off-white backgrounds.
+- Deep navy and near-black text.
+- Electric violet and indigo accents.
+- Subtle blue-purple gradients for selected hero elements.
+- Rounded cards, refined borders, elegant shadows, and generous spacing.
+- Modern typography using a suitable web-safe or available font.
+- Smooth, subtle hover transitions and button animations.
+- Professional product photography with consistent image proportions.
+- A polished logo using the letters VN and a custom visual identity.
+
+The interface must be visually impressive, consistent, accessible, and responsive.
+
+Avoid excessive gradients, excessive glassmorphism, giant empty spaces, cluttered layouts, and generic template appearance.
+
+Create a reusable design system with CSS variables or theme tokens for colors, typography, spacing, borders, and shadows.
+
+Use a consistent Vibe-Nova logo in the navbar, footer, authentication screens, and admin dashboard.
+
+==================================================
+2. TECHNOLOGY STACK AND ARCHITECTURE
+==================================================
+
+Frontend:
+- React.js with TypeScript.
+- Vite if compatible with the existing environment.
+- Tailwind CSS or the styling system already supported by the project.
+- React Router for routing if appropriate.
+- Lucide React icons where available.
+- Reusable components and clean folder organization.
+
+Backend:
+- Node.js.
+- Secure server-side API routes compatible with Vercel deployment.
+- Use a supported serverless architecture rather than depending on a permanently running server.
+
+Database:
+- MongoDB Atlas.
+- Mongoose where appropriate.
+- Well-defined schemas, validation, indexes, and relationships through IDs.
+
+Authentication:
+- Secure registration and login.
+- Password hashing using bcrypt or bcryptjs.
+- Secure HTTP-only session cookies or another correctly implemented authentication approach compatible with Vercel.
+- Role-based authorization for customers and administrators.
+
+Deployment:
+- GitHub for source control.
+- Vercel for hosting.
+- MongoDB Atlas for persistent database storage.
+
+IMPORTANT ARCHITECTURE RULE:
+Do not assume that a generated Node.js Express server will run continuously on Vercel. Implement backend endpoints using the Vercel-compatible approach supported by the project structure. If the frontend and backend need separate deployment targets, document that clearly and provide the simplest reliable setup.
+
+Use stable, compatible package versions and avoid unnecessary dependencies.
+
+==================================================
+3. PAGES AND ROUTING
+==================================================
+
+Implement the following routes with proper navigation:
+
+Public:
+- /
+- /products
+- /products/:id
+- /categories/:slug
+- /search
+- /cart
+- /login
+- /register
+- /forgot-password
+- /checkout
+- /order-success
+- /about
+- /contact
+- /privacy
+- /terms
+- /404
+
+Customer:
+- /account
+- /account/profile
+- /account/addresses
+- /account/orders
+- /account/orders/:id
+- /account/wishlist
+
+Admin:
+- /admin
+- /admin/products
+- /admin/products/new
+- /admin/products/:id/edit
+- /admin/categories
+- /admin/orders
+- /admin/customers
+
+Use protected routes where needed. Redirect unauthorized users appropriately. A customer must never access administrator functionality merely by entering an admin URL.
+
+Every visible navigation link and button must have a meaningful action.
+
+==================================================
+4. HOMEPAGE
+==================================================
+
+Create a beautiful homepage containing:
+
+A. Announcement bar:
+- Display promotions such as "Discover your next favorite."
+- Make promotional content easy to change.
+
+B. Responsive navigation:
+- Vibe-Nova logo.
+- Home.
+- Shop.
+- Categories dropdown.
+- New Arrivals.
+- Best Sellers.
+- Search icon or search bar.
+- Wishlist icon.
+- Account icon.
+- Cart icon with a live item count.
+- Mobile menu.
+
+C. Hero section:
+- Large, high-quality visual with a premium editorial layout.
+- Heading: "Find Your Next Vibe."
+- Supporting text: "Explore everyday essentials, standout styles, and smart picks curated for you."
+- Primary button: "Shop Collection".
+- Secondary button: "Explore New Arrivals".
+- Use a strong product or lifestyle image with a fallback if the image fails.
+
+D. Featured categories:
+- Electronics.
+- Fashion.
+- Home & Living.
+- Accessories.
+- Beauty & Lifestyle.
+
+E. Trending products:
+- Attractive product cards.
+- Product image, name, price, optional compare-at price, rating, category, wishlist button, and Add to Cart.
+- Show a sale label only when appropriate.
+
+F. New arrivals:
+- A product grid populated from the actual product data source.
+
+G. Best sellers:
+- Display products with real sales data when available.
+- Do not fabricate sales statistics and present them as real.
+
+H. Promotional banner:
+- A configurable campaign banner with a Shop Now button.
+
+I. Customer trust section:
+- Secure checkout.
+- Clear delivery and return information.
+- Customer support information.
+- Only make policies and promises that are configured.
+
+J. Newsletter section:
+- Email input with validation.
+- Store subscriptions in a database only if the backend is configured.
+- Otherwise provide an honest demo state.
+
+K. Footer:
+- Brand logo and tagline.
+- Shop links.
+- Customer service links.
+- About and contact links.
+- Social links only when actual destinations are configured.
+- Copyright notice.
+
+==================================================
+5. PRODUCT CATALOG AND SEARCH
+==================================================
+
+Build a complete product listing experience.
+
+Product cards must contain:
+- Product image.
+- Product name.
+- Current price.
+- Compare-at price when applicable.
+- Rating when actual rating data exists.
+- Category.
+- Stock status when available.
+- Wishlist control.
+- Add to Cart button.
+
+Provide:
+- Search by product name and description.
+- Category filters.
+- Minimum and maximum price filters.
+- Rating filters when rating data exists.
+- Availability filter.
+- Sorting by price low-to-high.
+- Sorting by price high-to-low.
+- Sorting by newest.
+- Sorting by rating when actual ratings exist.
+- Pagination or a Load More button.
+- Clear All Filters.
+- Loading skeletons.
+- Empty results state.
+- Error and retry states.
+
+Synchronize filter and search state with URL query parameters where appropriate.
+
+Filters must work together. Changing one filter must not unexpectedly remove other active filters.
+
+Use debounced search and server-side filtering for database-backed products.
+
+Do not pretend that filtering is server-side if it only operates on hardcoded client-side data.
+
+==================================================
+6. PRODUCT DETAILS
+==================================================
+
+Each product must have a dedicated detail page.
+
+Display:
+- Image gallery.
+- Product title.
+- Price and compare-at price.
+- Description.
+- Category.
+- Rating and review count only when data exists.
+- SKU where available.
+- Stock availability.
+- Quantity selector.
+- Variant selection for products with sizes, colors, or other options.
+- Add to Cart.
+- Buy Now.
+- Add to Wishlist.
+- Shipping and return information when configured.
+- Related products.
+
+Validate stock and selected variants before adding products to the cart.
+
+Prevent purchases above the available stock quantity.
+
+Show clear success, error, and loading feedback.
+
+==================================================
+7. SHOPPING CART
+==================================================
+
+Implement a working cart for guest users and authenticated customers.
+
+Required functionality:
+- Add items to the cart.
+- Remove items.
+- Increase or decrease quantity.
+- Update quantity directly if practical.
+- Select product variants.
+- Display product image, name, variant, unit price, quantity, and line total.
+- Calculate subtotal.
+- Calculate shipping.
+- Calculate discount where applicable.
+- Calculate final total.
+- Apply a coupon only if the coupon is valid on the server.
+- Show an empty cart illustration or message.
+- Continue Shopping button.
+- Proceed to Checkout button.
+
+Persist guest cart data across refreshes using appropriate browser storage.
+
+For logged-in users, persist the cart on the server or provide a reliable synchronization mechanism.
+
+Merge guest cart contents after login without creating duplicate lines for identical product variants.
+
+Always recalculate prices, discounts, stock, shipping, and totals on the server before placing an order. Never trust totals submitted by the browser.
+
+==================================================
+8. USER REGISTRATION AND AUTHENTICATION
+==================================================
+
+Implement:
+- Registration with name, email, and password.
+- Login with email and password.
+- Logout.
+- Client-side and server-side validation.
+- Password strength feedback.
+- Duplicate email prevention.
+- Secure password hashing.
+- Secure authentication session handling.
+- Protected customer routes.
+- Protected admin routes.
+- Profile editing.
+- Address management.
+- Account information display.
+- Appropriate success and error messages.
+
+Security requirements:
+- Never store plaintext passwords.
+- Never return password hashes to the frontend.
+- Do not store privileged authentication tokens in localStorage.
+- Use HTTP-only, Secure-in-production, SameSite cookies when using cookie sessions.
+- Add appropriate CSRF protections for cookie-authenticated state-changing requests.
+- Apply rate limiting to login and registration where practical.
+- Validate and normalize user input.
+- Do not reveal whether an email exists unnecessarily.
+- Use environment variables for secrets.
+
+For password reset, implement a secure token-based flow if email delivery is configured. If email delivery is unavailable, provide setup instructions and do not falsely claim that reset emails are sent.
+
+==================================================
+9. WISHLIST
+==================================================
+
+Implement:
+- Add product to wishlist.
+- Remove product from wishlist.
+- Wishlist page.
+- Move a wishlist product to the cart.
+- Persist wishlist data for authenticated users.
+- Handle guest wishlists if practical.
+
+Update wishlist icons immediately after successful operations.
+
+==================================================
+10. CHECKOUT AND ORDER MANAGEMENT
+==================================================
+
+Implement a complete checkout flow.
+
+Checkout steps:
+1. Verify cart contents.
+2. Collect customer name, phone number, and delivery address.
+3. Allow the customer to select a saved address or add a new one.
+4. Show an order summary.
+5. Recalculate all totals on the server.
+6. Select the available payment method.
+7. Create the order.
+8. Process payment or record an authorized cash-on-delivery order.
+9. Show the appropriate result page.
+
+Order fields:
+- Unique order number.
+- Customer ID.
+- Order items.
+- Product name and unit price snapshots.
+- Quantities and selected variants.
+- Shipping address snapshot.
+- Subtotal.
+- Shipping charges.
+- Discount.
+- Final total.
+- Payment method.
+- Payment status.
+- Order status.
+- Creation date.
+- Updated date.
+
+Order statuses may include:
+- Pending.
+- Confirmed.
+- Processing.
+- Shipped.
+- Delivered.
+- Cancelled.
+
+Use only valid transitions between statuses.
+
+Prevent duplicate order submissions and avoid duplicate orders when payment callbacks are repeated.
+
+Customers must only be able to view their own orders.
+
+Provide:
+- Order confirmation.
+- Order history.
+- Individual order details.
+- Order status display.
+- Cancellation functionality only when the order is eligible for cancellation.
+- Stock restoration when an order is cancelled, using safe and consistent database operations.
+
+Do not expose another customer's personal information.
+
+==================================================
+11. PAYMENT INTEGRATION
+==================================================
+
+Implement Razorpay integration in TEST MODE when credentials are available.
+
+Required:
+- Create payment orders on the server.
+- Calculate payment amount from trusted server-side product and cart data.
+- Use integer currency units as required by the provider.
+- Send only necessary checkout information to the frontend.
+- Verify payment signatures on the server.
+- Verify the payment and order relationship.
+- Handle payment success, failure, cancellation, and repeated callbacks.
+- Store payment references and payment status.
+- Do not mark an order as paid based only on a frontend success callback.
+- Use webhook signature verification if webhooks are implemented.
+
+Use environment variables such as:
+MONGODB_URI
+SESSION_SECRET or the secret required by the chosen authentication implementation
+RAZORPAY_KEY_ID
+RAZORPAY_KEY_SECRET
+RAZORPAY_WEBHOOK_SECRET if webhooks are enabled
+
+Only define and use the variables actually needed by the implementation.
+
+Never expose payment secrets in frontend code, public source files, or VITE_ environment variables.
+
+If payment credentials are missing:
+- The site must still run.
+- Display a clearly labeled demo checkout or a configured cash-on-delivery option.
+- Never claim that a simulated payment was a real transaction.
+- Provide clear instructions for enabling Razorpay test mode.
+
+Do not use real payment mode by default.
+
+==================================================
+12. ADMIN DASHBOARD
+==================================================
+
+Build a separate, professional admin dashboard.
+
+Dashboard cards:
+- Total orders.
+- Pending orders.
+- Total customers.
+- Total products.
+- Sales totals calculated from actual database records.
+
+If there is no real data, display zero or clearly labeled sample data.
+
+Product management:
+- Create product.
+- Edit product.
+- Delete product with confirmation.
+- Upload or configure product images.
+- Manage price.
+- Manage category.
+- Manage stock.
+- Manage variants.
+- Set active/inactive status.
+
+Order management:
+- View orders.
+- Search and filter orders.
+- View order details.
+- Update eligible order statuses.
+- View payment status.
+
+Category management:
+- Create categories.
+- Edit categories.
+- Delete categories only when safely permitted.
+
+Customer management:
+- View customer information required for administration.
+- Do not display passwords or password hashes.
+- Avoid exposing unnecessary sensitive information.
+
+Security:
+- Verify admin authorization on the server for every admin API endpoint.
+- Never grant admin privileges based on a client-side flag alone.
+- Do not expose an insecure public admin registration route.
+- Seed an initial admin only through a secure documented process or a protected setup script.
+- Do not hardcode production administrator credentials.
+
+==================================================
+13. DATABASE MODELS
+==================================================
+
+Create appropriate schemas for:
+
+User:
+- name
+- email
+- passwordHash
+- role
+- addresses
+- createdAt
+- updatedAt
+
+Product:
+- name
+- slug
+- description
+- price
+- compareAtPrice
+- images
+- categoryId
+- sku
+- stock
+- variants
+- active
+- createdAt
+- updatedAt
+
+Category:
+- name
+- slug
+- description
+- image
+- active
+
+Cart:
+- userId where applicable
+- items
+- productId
+- variant information
+- quantity
+- updatedAt
+
+Order:
+- orderNumber
+- userId
+- items
+- shippingAddress
+- pricing snapshots
+- payment information
+- order status
+- timestamps
+
+Wishlist:
+- userId
+- productIds
+- updatedAt
+
+Coupon:
+- code
+- discount type
+- discount value
+- validity dates
+- usage limits
+- active status
+
+NewsletterSubscription:
+- email
+- subscribedAt
+- status
+
+Add appropriate unique indexes and validation.
+
+Avoid embedding unnecessary duplicate customer records. Store historical snapshots where they are needed to preserve past orders accurately.
+
+Use safe stock updates and database transactions where supported. Document any limitations of the selected database deployment.
+
+==================================================
+14. BACKEND API
+==================================================
+
+Implement organized, documented API endpoints for:
+
+Authentication:
+- POST /api/auth/register
+- POST /api/auth/login
+- POST /api/auth/logout
+- GET /api/auth/me
+
+Products:
+- GET /api/products
+- GET /api/products/:id
+- GET /api/categories
+
+Cart:
+- GET /api/cart
+- POST /api/cart/items
+- PATCH /api/cart/items/:id
+- DELETE /api/cart/items/:id
+
+Wishlist:
+- GET /api/wishlist
+- POST /api/wishlist
+- DELETE /api/wishlist/:productId
+
+Orders:
+- POST /api/orders
+- GET /api/orders
+- GET /api/orders/:id
+- POST /api/orders/:id/cancel
+
+Payments:
+- POST /api/payments/create-order
+- POST /api/payments/verify
+- Webhook route when configured
+
+Admin:
+- GET /api/admin/dashboard
+- POST /api/admin/products
+- PATCH /api/admin/products/:id
+- DELETE /api/admin/products/:id
+- GET /api/admin/orders
+- PATCH /api/admin/orders/:id
+- Category and customer endpoints as required
+
+Newsletter:
+- POST /api/newsletter/subscribe
+
+Adapt endpoint paths to the selected routing framework if necessary.
+
+Use:
+- HTTP status codes correctly.
+- Centralized error handling.
+- Consistent JSON response formats.
+- Request validation.
+- Authentication and authorization middleware.
+- Server-side pagination and filtering.
+- Database connection reuse where appropriate for serverless environments.
+
+Do not leave important endpoints as empty functions or TODO comments.
+
+==================================================
+15. PRODUCT DATA AND IMAGES
+==================================================
+
+Seed the development database with at least 16 realistic sample products distributed across the main categories.
+
+Examples:
+- Wireless headphones.
+- Smartwatch.
+- Portable speaker.
+- Keyboard.
+- Casual sneakers.
+- T-shirts.
+- Backpack.
+- Sunglasses.
+- Desk lamp.
+- Home decor.
+- Travel accessories.
+- Lifestyle accessories.
+
+Use realistic sample prices in INR (₹).
+
+Mark seeded records as development/demo data where appropriate.
+
+Use suitable product images from reliable, permitted image sources. Provide graceful image fallbacks and consistent aspect ratios. Do not assume that arbitrary image URLs will always work.
+
+Do not fabricate customer reviews, ratings, sales figures, or testimonials as genuine.
+
+Keep product data in the database or a dedicated seed file instead of scattering hardcoded product arrays throughout the UI.
+
+==================================================
+16. CONTACT, POLICIES, AND SUPPORT
+==================================================
+
+Create:
+- About Us.
+- Contact Us.
+- Privacy Policy.
+- Terms and Conditions.
+- Shipping Policy.
+- Return and Refund Policy.
+- FAQ section.
+
+Use clearly identified project/demo policy text that can be customized before a real commercial launch.
+
+Do not invent a real company address, phone number, or customer support email.
+
+Provide a contact form with validation. Save submissions only when backend support exists, and clearly report its status.
+
+==================================================
+17. RESPONSIVENESS AND ACCESSIBILITY
+==================================================
+
+Ensure that:
+- The mobile navbar works.
+- Product grids adapt to different screen widths.
+- Forms remain usable on small screens.
+- The cart and checkout are mobile-friendly.
+- The admin dashboard adapts to tablet and desktop layouts.
+- Keyboard navigation works.
+- Focus indicators are visible.
+- Form fields have accessible labels.
+- Images have meaningful alt text.
+- Colors have adequate contrast.
+- Loading, empty, success, and error states are provided.
+- Animations respect reduced-motion preferences.
+
+Avoid horizontal overflow and broken layouts at common mobile widths.
+
+==================================================
+18. SEO AND PERFORMANCE
+==================================================
+
+Implement:
+- Page-specific document titles.
+- Meta descriptions.
+- Semantic HTML.
+- Product URLs with readable slugs where practical.
+- Open Graph metadata.
+- A custom favicon.
+- robots.txt.
+- Sitemap generation where practical.
+- Lazy-loaded product images.
+- Sensible image sizes.
+- Code splitting where appropriate.
+- Efficient database queries.
+- Pagination for large product collections.
+- Appropriate caching for public product data.
+
+Never cache personalized customer responses in a way that could expose one user's data to another user.
+
+==================================================
+19. ERROR HANDLING AND QUALITY ASSURANCE
+==================================================
+
+Handle:
+- Network failures.
+- Database connection errors.
+- Invalid IDs.
+- Invalid request bodies.
+- Out-of-stock products.
+- Expired sessions.
+- Unauthorized access.
+- Duplicate registrations.
+- Invalid coupons.
+- Payment verification failures.
+- Empty search results.
+- Broken product images.
+- Missing environment variables.
+
+Before finishing:
+1. Install or verify required dependencies.
+2. Run the production build.
+3. Fix TypeScript and compilation errors.
+4. Check route configuration.
+5. Check API route compatibility with Vercel.
+6. Verify that product search and filters work.
+7. Verify cart quantity and totals.
+8. Verify authentication and authorization.
+9. Verify order creation and stock checks.
+10. Verify that admin APIs cannot be used by customers.
+11. Verify payment logic in test mode when credentials are available.
+12. Check mobile and desktop layouts.
+
+Do not claim a test passed unless it was actually run.
+
+If a feature cannot be tested because credentials or external services are unavailable, state that limitation and provide exact configuration steps.
+
+==================================================
+20. PROJECT STRUCTURE AND DOCUMENTATION
+==================================================
+
+Organize the project cleanly. Adapt this structure to the chosen framework:
+
+src/
+  components/
+  pages/
+  layouts/
+  hooks/
+  services/
+  contexts/
+  types/
+  utils/
+  styles/
+
+Add the appropriate backend structure for:
+- API routes.
+- Database connection.
+- Models.
+- Middleware.
+- Validation.
+- Authentication.
+- Payment services.
+- Business logic.
+
+Provide:
+- package.json.
+- .gitignore.
+- .env.example.
+- README.md.
+- Database seed script.
+- Setup instructions.
+- Deployment instructions.
+- Test instructions.
+- API documentation.
+- Sample environment variable documentation.
+
+README.md must explain:
+1. Project overview.
+2. Technologies used.
+3. Local installation.
+4. Development server startup.
+5. MongoDB Atlas setup.
+6. Environment variable configuration.
+7. Database seeding.
+8. Authentication setup.
+9. Razorpay test mode setup.
+10. GitHub repository setup.
+11. Vercel deployment.
+12. Troubleshooting common deployment errors.
+
+Never include real credentials in .env.example.
+
+==================================================
+21. GITHUB AND VERCEL DEPLOYMENT
+==================================================
+
+Prepare the code for a reliable deployment workflow.
+
+Requirements:
+- Correct build and start scripts for the chosen framework.
+- Correct Vercel configuration when needed.
+- Correct frontend/backend route handling.
+- Secure production environment variables.
+- Production database connection configuration.
+- No dependence on local filesystem persistence for orders or users.
+- No secrets committed to Git.
+- No unnecessary dependency on a long-running backend process.
+- A README deployment checklist.
+
+If the project uses a separate backend service, clearly explain why it is needed and provide its deployment instructions. Prefer a single Vercel project when technically appropriate.
+
+Ensure refreshes on supported frontend routes do not produce accidental 404 errors.
+
+==================================================
+22. IMPLEMENTATION PRIORITIES
+==================================================
+
+Build in this order:
+
+Phase 1:
+- Brand identity.
+- Responsive homepage.
+- Navbar and footer.
+- Product catalog.
+- Product details.
+- Search, filtering, and sorting.
+
+Phase 2:
+- Shopping cart.
+- Quantity management.
+- Wishlist.
+- Persistent state.
+
+Phase 3:
+- Backend API.
+- MongoDB Atlas integration.
+- User authentication.
+- Product and category models.
+
+Phase 4:
+- Checkout.
+- Order management.
+- Payment test mode.
+- Customer account.
+
+Phase 5:
+- Admin dashboard.
+- Product and order management.
+- Security checks.
+- Validation and error handling.
+
+Phase 6:
+- Documentation.
+- Build checks.
+- Vercel configuration.
+- Deployment instructions.
+
+Start by building a complete, polished user-facing storefront and then implement the backend and remaining functionality. Do not stop after generating the homepage.
+
+If output or execution limits prevent completing everything in one pass, finish one coherent phase at a time and continue from the existing project without deleting working features.
+
+==================================================
+23. FINAL ACCEPTANCE CRITERIA
+==================================================
+
+The project is complete only when:
+
+- Vibe-Nova has a consistent, professional brand identity.
+- The homepage and catalog render correctly.
+- Product search, filters, and sorting work.
+- Product details work.
+- Cart operations work and totals are calculated correctly.
+- Authentication is implemented securely.
+- Database persistence works when MongoDB is configured.
+- Customers can place and view their own orders.
+- Admin operations are protected on the server.
+- Payment integration is verified in test mode or explicitly marked as unconfigured.
+- All major pages are responsive.
+- Error states are handled.
+- The production build succeeds.
+- Deployment and environment configuration are documented.
+- No secret keys are exposed.
+- No major button is merely decorative.
+
+Build Vibe-Nova now. Inspect the available environment, implement the actual application, run the available checks, fix errors, and explain the exact remaining steps needed to connect external services and deploy to Vercel.
+
+The result must look like a premium shopping brand and function as a credible full-stack engineering project.
